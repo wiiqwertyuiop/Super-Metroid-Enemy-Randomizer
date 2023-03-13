@@ -5,8 +5,7 @@ int main()
 {
     // TODO: GET INPUT
     char const *fileName = "Z:\\wiiqw\\Documents\\workspaces\\SM_EnemyRando\\ROM.smc";
-    auto ROM = openFile(fileName);
-    randomizeEnemies(ROM);
-    // writeFile(ROM, "output.smc");
+    readAsROM(openFile(fileName));
+    writeFile(randomizeROM(), "Z:\\wiiqw\\Documents\\workspaces\\SM_EnemyRando\\SuperMetroid\\output.smc");
     return 0;
 }

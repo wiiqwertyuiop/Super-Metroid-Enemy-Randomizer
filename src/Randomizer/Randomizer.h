@@ -5,6 +5,7 @@
 #include <vector>
 using namespace std;
 
-void randomizeEnemies(vector<unsigned char> &);
+void readAsROM(vector<unsigned char>);
+vector<unsigned char> randomizeROM();
 
 #endif

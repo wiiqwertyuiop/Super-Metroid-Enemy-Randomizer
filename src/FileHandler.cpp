@@ -25,3 +25,16 @@ vector<unsigned char> openFile(string fileName)
 
     return buffer;
 }
+
+void writeFile(vector<unsigned char> output, string fileName)
+{
+    fstream file(fileName, ios::out | ios::binary | ios::trunc);
+
+    if (!file)
+    {
+        throw runtime_error("Error opening: [" + fileName + "]");
+    }
+
+    file.write((char *)output.data(), output.size());
+    file.close();
+}
