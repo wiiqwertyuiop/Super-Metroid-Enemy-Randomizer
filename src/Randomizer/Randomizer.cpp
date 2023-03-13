@@ -37,11 +37,11 @@ void randomizeEnemies(int *curRoom)
 vector<unsigned char> randomizeROM()
 {
     // space pirates need special gfx
+    // ignore certain sprites
     // dont do elevator rooms
 
     // logic?
     // too many of certain sprites. can we get rid of some?
-    // ignore certain sprites
     // fix crashes
     // stuck in walls
     for (auto room : RoomTable)
