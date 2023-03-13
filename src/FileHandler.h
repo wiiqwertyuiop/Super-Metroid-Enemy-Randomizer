@@ -8,5 +8,6 @@
 using namespace std;
 
 vector<unsigned char> openFile(string);
+void writeFile(vector<unsigned char> &, string);
 
 #endif
