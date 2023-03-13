@@ -3,9 +3,12 @@
 
 #include <random>
 #include <vector>
+#include <map>
+#include <array>
 using namespace std;
 
 void readAsROM(vector<unsigned char>);
 vector<unsigned char> randomizeROM();
+int getRand(int);
 
 #endif
