@@ -4,91 +4,109 @@
 
 vector<unsigned char> ROM;
 
-auto changeAllowedEnemies(int roomHeader)
+auto changeHeaderData(Room curRoom)
 {
-    map<int, array<unsigned char, 6>> outMap;
-    for (int i = roomHeader; !(ROM[i] == 0xFF && ROM[i + 1] == 0xFF); i += 4)
-    {
-        int replaceID = (ROM[i] << 8) + ROM[i + 1];
-        int r = getRand(sizeof(EnemyTable) / sizeof(EnemyTable[0]) - 1);
+    map<int, Enemy> replaceMap;
+    int i = curRoom.getHeaderDataBeg();
 
-        outMap[replaceID] = {EnemyTable[r][0], EnemyTable[r][1]};
-        ROM[i] = EnemyTable[r][0];
-        ROM[i + 1] = EnemyTable[r][1];
+    while (!(ROM[i] == 0xFF && ROM[i + 1] == 0xFF) && i < curRoom.getHeaderDataEnd())
+    {
+        int r = getRand(sizeof(EnemyTable) / sizeof(Enemy) - 1);
+        int enemyToReplaceID = (ROM[i] << 8) + ROM[i + 1];
+        Enemy newEnemy = EnemyTable[r];
+
+        replaceMap[enemyToReplaceID] = newEnemy;
+        ROM[i] = newEnemy.ID[0];
+        ROM[++i] = newEnemy.ID[1];
 
         // Palette data
-        ROM[i + 2] = (1 + i) - roomHeader;
-        ROM[i + 3] = 0;
+        // Not sure how this works yet so currently just increments it
+        ROM[++i] = (1 + i) - curRoom.getHeaderDataBeg();
+        ROM[++i] = 0;
+        i++;
     }
-    return outMap;
+    return replaceMap;
 }
 
-void randomizeEnemies(int *curRoom)
+void replaceEnemy(int spriteData, Enemy newEnemy)
 {
-    auto replaceMap = changeAllowedEnemies(curRoom[0]);
+    ROM[spriteData] = newEnemy.ID[0];
+    ROM[++spriteData] = newEnemy.ID[1];
 
-    int endOfData = curRoom[3];
-    for (int spriteData = curRoom[2]; spriteData < endOfData - 3; spriteData += 16)
+    // X and Y pos
+    ++spriteData;
+    ++spriteData;
+    ++spriteData;
+    ++spriteData;
+
+    ROM[++spriteData] = newEnemy.Orientation[0]; // oo oo - Oritentation
+    ROM[++spriteData] = newEnemy.Orientation[1];
+
+    ROM[++spriteData] = newEnemy.Special[0]; // TEMP - Special properties
+    ROM[++spriteData] = newEnemy.Special[1]; // TEMP
+
+    ROM[++spriteData] = newEnemy.SpecialGFX[0];
+    ROM[++spriteData] = newEnemy.SpecialGFX[1];
+
+    ROM[++spriteData] = newEnemy.Speed[0]; // Speed
+    ROM[++spriteData] = newEnemy.Speed[1];
+
+    ROM[++spriteData] = newEnemy.Speed2[0]; // Speed 2
+    ROM[++spriteData] = newEnemy.Speed2[1];
+}
+
+void randomizeEnemies(Room curRoom)
+{
+    //  Change the sprite header data, and get a replacement map for enemies
+    auto replaceMap = changeHeaderData(curRoom);
+
+    // Loop through sprite data in this room
+    int spriteData = curRoom.getSpriteDataBeg();
+    while (spriteData < curRoom.getSpriteDataEnd() - 3)
     {
-        int curID = (ROM[spriteData] << 8) + ROM[spriteData + 1];
-        unsigned char byteL = replaceMap[curID][0];
-        unsigned char byteH = replaceMap[curID][1];
-
-        // make sure valid ID
-        // also check to not replace shutter sprites
-        if (byteL && byteH && ROM[spriteData + 1] != 0xD5 && curID != 0xFFD4)
+        // Make sure we have a valid ID
+        // and do a check so we don't replace shutter sprites
+        int oldEnemyID = (ROM[spriteData] << 8) + ROM[spriteData + 1];
+        if (replaceMap.count(oldEnemyID) && ROM[spriteData + 1] != 0xD5 && oldEnemyID != 0xFFD4)
         {
-            ROM[spriteData] = byteL;
-            ROM[spriteData + 1] = byteH;
-
-            // X and Y pos
-
-            ROM[spriteData + 6] = 0; // oo oo - Oritentation
-            ROM[spriteData + 7] = 0;
-
-            ROM[spriteData + 8] = 0;    // TEMP - Special properties
-            ROM[spriteData + 9] = 0x20; // TEMP
-
-            if (byteH >= 0xF3)
-            {
-                ROM[spriteData + 10] = 0x04; // Special GFX
-            }
-            else
-            {
-                ROM[spriteData + 10] = 0;
-            }
-            ROM[spriteData + 11] = 0;
-
-            ROM[spriteData + 12] = replaceMap[curID][2]; // Speed
-            ROM[spriteData + 13] = replaceMap[curID][3];
-
-            ROM[spriteData + 14] = replaceMap[curID][4]; // Speed 2
-            ROM[spriteData + 15] = replaceMap[curID][5];
+            replaceEnemy(spriteData, replaceMap[oldEnemyID]);
         }
+        spriteData += 16; // next block
     }
+    // Set enemies required to clear room to 0
+    ROM[curRoom.getSpriteDataEnd()] = 0;
 }
 
 vector<unsigned char> randomizeROM()
 {
-    // remove enemies to clear ROOM
     // something is not right with space pirate IDs
 
     // roll things
     // kago is not right. 0x0A is not working + plus standable
+    // walking robots?
 
-    // logic? - eg early game
-    // stuck in walls
+    // stuck in walls / find a way to orient wall shooters?
 
     // seed
     // optomize
+    //  - main sould just worry about file name
+    //  - pass file name to Randomizer
+    //  - move file opener into Randomizer (but still keep seperate file)
+    //  -
 
-    // too many of certain sprites. can we get rid of some?
+    // --- test ---
+
+    // --- release ---
+
     // random speed? aka waver
     // PUU not working + other mutli piece enemies
     //    https://metroidconstruction.com/SMMM/
+    //
+    // too many of certain sprites. can we get rid of some?
+    // Room TESTY(0x1A0009, 0x1A001E, 0x108002, 0x1080D4);
+    // logic? - eg early game
 
-    int testy[][4] = {{0x1A0067, 0x1A007C, 0x108261, 0x108363}};
-    for (auto room : RoomTable)
+    for (Room room : RoomTable)
     {
         randomizeEnemies(room);
     }
