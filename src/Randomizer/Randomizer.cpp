@@ -6,7 +6,7 @@ vector<unsigned char> ROM;
 
 auto changeAllowedEnemies(int roomHeader)
 {
-    map<int, array<int, 6>> outMap;
+    map<int, array<unsigned char, 6>> outMap;
     for (int i = roomHeader; !(ROM[i] == 0xFF && ROM[i + 1] == 0xFF); i += 4)
     {
         int replaceID = (ROM[i] << 8) + ROM[i + 1];
@@ -31,8 +31,8 @@ void randomizeEnemies(int *curRoom)
     for (int spriteData = curRoom[2]; spriteData < endOfData - 3; spriteData += 16)
     {
         int curID = (ROM[spriteData] << 8) + ROM[spriteData + 1];
-        int byteL = replaceMap[curID][0];
-        int byteH = replaceMap[curID][1];
+        unsigned char byteL = replaceMap[curID][0];
+        unsigned char byteH = replaceMap[curID][1];
 
         // make sure valid ID
         // also check to not replace shutter sprites
@@ -70,13 +70,23 @@ void randomizeEnemies(int *curRoom)
 
 vector<unsigned char> randomizeROM()
 {
+    // remove enemies to clear ROOM
     // something is not right with space pirate IDs
-    // 79fba
 
-    // logic?
-    // too many of certain sprites. can we get rid of some?
+    // roll things
+    // kago is not right. 0x0A is not working + plus standable
+
+    // logic? - eg early game
     // stuck in walls
+
+    // seed
+    // optomize
+
+    // too many of certain sprites. can we get rid of some?
     // random speed? aka waver
+    // PUU not working + other mutli piece enemies
+    //    https://metroidconstruction.com/SMMM/
+
     int testy[][4] = {{0x1A0067, 0x1A007C, 0x108261, 0x108363}};
     for (auto room : RoomTable)
     {

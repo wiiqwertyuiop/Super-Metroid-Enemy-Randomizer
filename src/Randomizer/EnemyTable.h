@@ -1,7 +1,7 @@
 #ifndef ENEMYTABLE_H // To make sure you don't declare the function more than once by including the header multiple times.
 #define ENEMYTABLE_H
 
-int EnemyTable[][6] = {
+unsigned char EnemyTable[][6] = {
     // Data is two bytes:
     // [ID]   |  [SPEED]  |  [SPEED2]
     {0xBF, 0xCE, 0x03, 0x00, 0x20, 0x00}, // BOYON	Boyon
@@ -69,7 +69,7 @@ int EnemyTable[][6] = {
     {0xFF, 0xE7, 0x0A, 0x00, 0x00, 0x00}, // KAGO	Kago
     {0x3F, 0xE8, 0x00, 0x00, 0x60, 0x3A}, // LAVAMAN	Magdollite
     {0x7F, 0xE8},                         // NOMI	Beetom
-    {0xBF, 0xE8, 0x01, 0x00, 0x70, 0x00}, // PUU	Powamp
+    //{0xBF, 0xE8, 0x01, 0x00, 0x70, 0x00}, // PUU	Powamp
     {0xFF, 0xE8},                         // ROBO	Work Robot
     {0x3F, 0xE9},                         // ROBO2	Work Robot
     {0x7F, 0xE9, 0x0A, 0x00, 0x00, 0x00}, // PIPE	Bull
@@ -80,10 +80,10 @@ int EnemyTable[][6] = {
     {0xBF, 0xEA},                         // HACHI1	Green Kihunter
     {0x3F, 0xEB},                         // HACHI2	Greenish Kihunter
     {0xBF, 0xEB},                         // HACHI3	Red Kihunter
-    {0x7F, 0xF0},                         // DORI	Shaktool
+    //{0x7F, 0xF0},                         // DORI	Shaktool
     {0x93, 0xF1},                         // ZEB	Zeb
     {0xD3, 0xF1, 0x02, 0x00, 0x00, 0x00}, // ZEBBO	Zebbo
-    {0x13, 0xF2},                         // GAMET	Gamet
+    //{0x13, 0xF2},                         // GAMET	Gamet
     {0x53, 0xF2},                         // GEEGA	Geega
     {0x53, 0xF3, 0x00, 0x80, 0x18, 0x00}, // BATTA1	Grey Zebesian
     {0x93, 0xF3, 0x00, 0x80, 0x18, 0x00}, // BATTA1Br	Green Zebesian
