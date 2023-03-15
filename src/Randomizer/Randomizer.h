@@ -7,8 +7,12 @@
 #include <array>
 using namespace std;
 
-void readAsROM(vector<unsigned char>);
-vector<unsigned char> randomizeROM();
+namespace Randomizer
+{
+    inline vector<unsigned char> ROM;
+    void randomize();
+}
+
 int getRand(int);
 
 #endif

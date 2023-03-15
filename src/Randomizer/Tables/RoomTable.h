@@ -1,7 +1,7 @@
 #ifndef ROOMTABLE_H // To make sure you don't declare the function more than once by including the header multiple times.
 #define ROOMTABLE_H
 
-#include "./Classes/Room.h"
+#include "../Classes/Room.h"
 
 Room RoomTable[] = {
     // B4 | A1

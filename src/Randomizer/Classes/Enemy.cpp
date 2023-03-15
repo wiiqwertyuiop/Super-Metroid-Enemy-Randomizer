@@ -14,5 +14,4 @@ Enemy::Enemy(int ID_L, int ID_H, int Speed_L, int Speed_H, int Speed2_L, int Spe
     Speed[1] = Speed_H;
     Speed2[0] = Speed2_L;
     Speed2[1] = Speed2_H;
-    TEST = SpecialGFX_H;
 }

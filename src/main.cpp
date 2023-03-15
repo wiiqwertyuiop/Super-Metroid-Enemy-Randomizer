@@ -1,11 +1,11 @@
-#include "FileHandler.h"
+#include "FileHandler/FileHandler.h"
 #include "Randomizer/Randomizer.h"
 
 int main()
 {
-    // TODO: GET INPUT
-    char const *fileName = "Z:\\wiiqw\\Documents\\workspaces\\SM_EnemyRando\\ROM.smc";
-    readAsROM(openFile(fileName));
-    writeFile(randomizeROM(), "Z:\\wiiqw\\Documents\\workspaces\\SM_EnemyRando\\SuperMetroid\\output.smc");
+    char const *fileName = "Z:\\wiiqw\\Documents\\SuperMetroid\\clean.smc";
+    Randomizer::ROM = openFile(fileName);
+    Randomizer::randomize();
+    writeFile(Randomizer::ROM, "Z:\\wiiqw\\Documents\\SuperMetroid\\output.smc");
     return 0;
 }
