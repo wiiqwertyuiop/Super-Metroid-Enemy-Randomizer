@@ -56,7 +56,7 @@ Enemy EnemyTable[] = {
     Enemy(0x3F, 0xDD),                                                       // MZOOMER	Grey Geemer
     Enemy(0x7F, 0xDD),                                                       // METROID	Metroid
     Enemy(0xBF, 0xDF, 0x00, 0x02, 0x50, 0xA0),                               // RSTONE	Boulder
-    Enemy(0xFF, 0xDF, 0x40, 0x00, 0x70, 0x80),                               // KZAN	Kzan
+    Enemy(0xFF, 0xDF, 0x40, 0x00, 0x70, 0x80, 0x00, 0x00, 0x00, 0xA0),       // KZAN	Kzan
     Enemy(0x7F, 0xE0),                                                       // HIBASHI	Hibashi
     Enemy(0xBF, 0xE0, 0x10, 0x40, 0x01, 0x20),                               // PUROMI	Puromi
     Enemy(0xFF, 0xE0),                                                       // SCLAYD	Mini-Kraid

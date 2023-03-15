@@ -1,0 +1,1 @@
+id ICON "ico/iconwindres my.rc -O coff -o my.res.ico"

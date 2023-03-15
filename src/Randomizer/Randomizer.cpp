@@ -2,11 +2,11 @@
 #include "Tables/RoomTable.h"
 #include "Tables/EnemyTable.h"
 
-// seed
+// input
 
 // stuck in walls / find a way to orient wall shooters?
 
-// --- test ---
+// -- test --
 
 // --- release ---
 
@@ -21,6 +21,29 @@
 
 namespace Randomizer
 {
+    mt19937 gen;
+    int seed;
+    vector<unsigned char> ROM;
+
+    void initalize(vector<unsigned char> _ROM, int s)
+    {
+        ROM = _ROM;
+        seed = s;
+        if (seed < 0)
+        {
+            random_device rd;
+            seed = rd();
+        }
+        mt19937 _gen(seed);
+        gen = _gen;
+    }
+
+    int getRandNumber(int max)
+    {
+        uniform_int_distribution<int> distr(0, max);
+        return distr(gen);
+    }
+
     auto changeHeaderData(Room curRoom)
     {
         map<int, Enemy> replaceMap;
@@ -28,8 +51,9 @@ namespace Randomizer
 
         while (!(ROM[i] == 0xFF && ROM[i + 1] == 0xFF) && i < curRoom.getHeaderDataEnd())
         {
-            int r = getRand(sizeof(EnemyTable) / sizeof(Enemy) - 1);
             int enemyToReplaceID = (ROM[i] << 8) + ROM[i + 1];
+
+            int r = getRandNumber(sizeof(EnemyTable) / sizeof(Enemy) - 1);
             Enemy newEnemy = EnemyTable[r];
 
             replaceMap[enemyToReplaceID] = newEnemy;
@@ -38,7 +62,7 @@ namespace Randomizer
 
             // Palette data
             // Not sure how this works yet so currently just increments it
-            ROM[++i] = (1 + i) - curRoom.getHeaderDataBeg();
+            ROM[++i] = (i + 1) - curRoom.getHeaderDataBeg();
             ROM[++i] = 0;
             i++;
         }
@@ -81,8 +105,8 @@ namespace Randomizer
         int spriteData = curRoom.getSpriteDataBeg();
         while (spriteData < curRoom.getSpriteDataEnd() - 3)
         {
-            // Make sure we have a valid ID
-            // and do a check so we don't replace shutter sprites
+            // Make sure we have a valid ID.
+            // Also do a check to ensure we don't replace shutter sprites
             int oldEnemyID = (ROM[spriteData] << 8) + ROM[spriteData + 1];
             if (replaceMap.count(oldEnemyID) && ROM[spriteData + 1] != 0xD5 && oldEnemyID != 0xFFD4)
             {
@@ -102,12 +126,14 @@ namespace Randomizer
             randomizeEnemies(room);
         }
     }
-}
 
-int getRand(int max)
-{
-    random_device rd;  // obtain a random number from hardware
-    mt19937 gen(rd()); // seed the generator
-    uniform_int_distribution<> distr(0, max);
-    return distr(gen);
+    vector<unsigned char> getROM()
+    {
+        return ROM;
+    }
+
+    int getSeed()
+    {
+        return seed;
+    }
 }
