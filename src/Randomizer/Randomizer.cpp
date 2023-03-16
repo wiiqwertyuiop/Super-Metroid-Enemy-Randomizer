@@ -2,25 +2,6 @@
 #include "Tables/RoomTable.h"
 #include "Tables/EnemyTable.h"
 
-// TODO:
-// SM room data compressed?
-
-// Wall check
-//  Move in 8 directions. Find closest opening. Move sprite there.
-//  You can also tell which way the wall is like this for oreientation
-
-// Give sprite difficulty?
-// If too hard limit sprites?
-// Or some other kind of logic
-
-// --- Future ideas ---
-// increase max seed number?
-// option for replacing All of one enemy?
-// random speed/speed2? aka waver
-// PUU not working + other mutli piece enemies
-//    https://metroidconstruction.com/SMMM/
-//
-
 namespace Randomizer
 {
     mt19937 gen;
@@ -81,6 +62,10 @@ namespace Randomizer
         ++spriteData;
         ++spriteData;
         ++spriteData;
+        // TODO: Wall check?
+        //  Move in 8 directions. Find closest opening. Move sprite there.
+        //  You can also tell which way the wall is like this for oreientation
+        // NOTE: SM room data is compressed
 
         ROM[++spriteData] = newEnemy.Orientation[0]; // oo oo - Oritentation
         ROM[++spriteData] = newEnemy.Orientation[1];
