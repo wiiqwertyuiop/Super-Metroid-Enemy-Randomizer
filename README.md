@@ -8,7 +8,7 @@ Randomizers are very fun to play and watch! Current randomizers randomize just a
 
 The goal is to have something that doesn't just work with the orginal game, but also can be patched over existing randomizer ROMs.
 
-This current implementation is a proof of concept, but does do it's goal of replacing and randomizing the enemies in the game.
+This current implementation is a proof of concept, but does do it's goal of replacing and randomizing the enemies in the game. It also removed locked grey doors so you don't have to clear the sprites in a room.
 
 ## What it does not do
 
