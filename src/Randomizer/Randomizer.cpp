@@ -127,6 +127,15 @@ namespace Randomizer
         {
             randomizeEnemies(room);
         }
+
+        // Make robos walk
+        ROM[0x144B81] = 0xEA;
+        ROM[0x144B82] = 0xEA;
+
+        // Faster elevators
+        /*         ROM[0x1195B0] = 0x07;
+                ROM[0x1195EC] = 0x07;
+                ROM[0x1195D2] = 0x07; */
     }
 
     vector<unsigned char> getROM()
