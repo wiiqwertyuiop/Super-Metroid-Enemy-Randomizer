@@ -6,15 +6,15 @@
 
 Randomizers are very fun to play and watch! Current randomizers randomize just about everything EXCEPT the enemies, which I recently thought would be a fun addition for all the randos out there.
 
-The goal is to have something that doesn't just work with the orginal game, but also can be patched over existing randomizer ROMs.
+The goal is to have something that doesn't just work with the original game, but also can be patched over existing randomizer ROMs.
 
-This current implementation is a proof of concept, but does do it's goal of replacing and randomizing the enemies in the game. It also removed locked grey doors so you don't have to clear the sprites in a room.
+This current implementation is a proof of concept, but does accomplish the goal of replacing and randomizing the enemies in the game. It also removes locked grey doors so you don't have to clear the sprites in a room.
 
 ## What it does not do
 
 - Bosses are left unchanged.
 - Certain key sprites are ignored (i.e shutters, elevator sprites, etc.)
-- Not *every* enemy in the game will make an apperance. This is to prevent crashing and soft locks.
+- Not *every* enemy in the game will make an appearance. This is to prevent crashing and soft locks.
 - Currently there is no logic in place for progression. So impossible seeds are likely.
 
 ## Feedback is appreciated!
