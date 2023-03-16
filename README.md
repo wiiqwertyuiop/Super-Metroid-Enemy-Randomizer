@@ -21,6 +21,9 @@ This current implementation is a proof of concept, but does accomplish the goal 
 
 This is still a WIP project, so any ideas, feedback, or bugs are welcome.
 
+Would appreciate reportings of any crashes you encounter, by the seed number.
+
+[https://forum.metroidconstruction.com/index.php/topic,5643.msg72038.html](https://forum.metroidconstruction.com/index.php/topic,5643.msg72038.html)
 Discord: wiiqwertyuiop#8815
 
 ## TODO/Considerations
