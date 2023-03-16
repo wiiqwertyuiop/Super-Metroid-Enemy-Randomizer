@@ -16,6 +16,7 @@
 // Or some other kind of logic
 
 // --- Future ideas ---
+// increase seed?
 // All of one enemy?
 // random speed/speed2? aka waver
 // PUU not working + other mutli piece enemies
