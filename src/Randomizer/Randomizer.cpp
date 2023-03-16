@@ -2,20 +2,25 @@
 #include "Tables/RoomTable.h"
 #include "Tables/EnemyTable.h"
 
-// stuck in walls / find a way to orient wall shooters?
+// TODO:
+// Missing dlls?
+// .exe Safety threat?
+// SM room data compressed?
 
-// -- test --
+// Wall check
+//  Move in 8 directions. Find closest opening. Move sprite there.
+//  You can also tell which way the wall is like this for oreientation
 
-// --- release ---
+// Give sprite difficulty?
+// If too hard limit sprites?
+// Or some other kind of logic
 
+// --- Future ideas ---
 // All of one enemy?
-// random speed? aka waver
+// random speed/speed2? aka waver
 // PUU not working + other mutli piece enemies
 //    https://metroidconstruction.com/SMMM/
 //
-// too many of certain sprites. can we get rid of some?
-// Room TESTY(0x1A0009, 0x1A001E, 0x108002, 0x1080D4);
-// logic? - eg early game
 
 namespace Randomizer
 {
