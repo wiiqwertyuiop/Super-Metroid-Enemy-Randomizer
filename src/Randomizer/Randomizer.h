@@ -10,9 +10,10 @@ using namespace std;
 namespace Randomizer
 {
     void randomize();
-    void initalize(vector<unsigned char>, int seed = -1);
+    void initalize(vector<unsigned char>);
     vector<unsigned char> getROM();
     int getSeed();
+    void setSeed(unsigned int);
 }
 
 #endif

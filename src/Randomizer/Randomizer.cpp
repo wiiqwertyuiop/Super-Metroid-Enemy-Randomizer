@@ -2,8 +2,6 @@
 #include "Tables/RoomTable.h"
 #include "Tables/EnemyTable.h"
 
-// input
-
 // stuck in walls / find a way to orient wall shooters?
 
 // -- test --
@@ -22,14 +20,14 @@
 namespace Randomizer
 {
     mt19937 gen;
-    int seed;
+    unsigned int seed;
+    bool haveSeed = false;
     vector<unsigned char> ROM;
 
-    void initalize(vector<unsigned char> _ROM, int s)
+    void initalize(vector<unsigned char> _ROM)
     {
         ROM = _ROM;
-        seed = s;
-        if (seed < 0)
+        if (!haveSeed)
         {
             random_device rd;
             seed = rd();
@@ -130,6 +128,12 @@ namespace Randomizer
     vector<unsigned char> getROM()
     {
         return ROM;
+    }
+
+    void setSeed(unsigned int _seed)
+    {
+        seed = _seed;
+        haveSeed = true;
     }
 
     int getSeed()

@@ -5,9 +5,11 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <filesystem>
 using namespace std;
 
 vector<unsigned char> openFile(string);
 void writeFile(vector<unsigned char>, string);
+string makeOutputName(string, unsigned int);
 
 #endif
