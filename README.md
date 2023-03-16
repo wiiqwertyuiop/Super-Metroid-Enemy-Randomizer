@@ -34,6 +34,7 @@ Discord: wiiqwertyuiop#8815
 > Or some other kind of logic
 
 - [ ] Some enemies are stuck inside walls. Logic to move them into an open area?
+- [ ] With the above one; fix orientation for certain wall clinging sprites.
 - [ ] Disable damage through doors and on elevators?
 
 ### Future ideas
