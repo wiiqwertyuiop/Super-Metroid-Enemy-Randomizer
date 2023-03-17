@@ -14,7 +14,7 @@ This current implementation is a proof of concept, but does accomplish the goal 
 
 - Bosses are left unchanged.
 - Certain key sprites are ignored (i.e shutters, elevator sprites, etc.)
-- Not *every* enemy in the game will make an appearance. This is to prevent crashing and soft locks.
+- Most are there, but not *every* enemy in the game will make an appearance. This is to prevent crashing and soft locks.
 - Currently there is no logic in place for progression. So impossible seeds are likely.
 
 ## Feedback is appreciated!
